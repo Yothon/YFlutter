@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/AppBarPage.dart';
 import 'package:flutter_app/CardItem.dart';
+import 'package:flutter_app/ExpandItemPage.dart';
 import 'package:flutter_app/ListModel.dart';
 import 'package:flutter_app/Page.dart';
 import 'package:flutter_app/SecondPage.dart';
+import 'package:flutter_app/TabLayoutBarPage.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -44,7 +46,10 @@ class NavigatorTo extends State<CardItemOperation> {
         removeBuilder: _buildRemoveItem,
         listKey: globalKey,
         initialItems: <Page>[
-          new Page(1, "CAR",Icons.directions_car), new Page(2, "BOAT",Icons.directions_boat), new Page(3, "BUS",Icons.directions_bus)
+          Page(1, "AppBarTab",Icons.tab),
+          Page(2, "NetWork",Icons.network_cell),
+          Page(3, "Expand",Icons.expand_more),
+          Page(4, "TabLayout", Icons.tablet)
         ]);
     _nextItem = 3;
   }
@@ -63,7 +68,12 @@ class NavigatorTo extends State<CardItemOperation> {
           case 1:
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SecondPage('Second')));
             break;
-          case 2:break;
+          case 2:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ExpandItemPage()));
+            break;
+          case 3:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TabLayoutBarPage()));
+            break;
         };
         setState(() {
           _selectedItem = _selectedItem ==index ? null : index;

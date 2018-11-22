@@ -55,7 +55,7 @@ class _AppBarPageDemo extends State<AppBarPage>
                   data: Theme.of(context).copyWith(accentColor: Colors.white),
                   child: Container(height: 48.0,
                     alignment: Alignment.center,
-                    child: TabPageSelector(controller: _tabController,),),))),
+                    child: TabPageSelector(controller: _tabController))))),
         body: TabBarView(
             controller: _tabController,
             children: list.map((Choice choice){
