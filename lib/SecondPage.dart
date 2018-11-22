@@ -21,8 +21,8 @@ class SecondPage extends StatelessWidget {
         body: new ListItem(),
       ),
       onWillPop: () {
-        Navigator.pop(context, "Second");
-        new Future.value(true);
+        Navigator.pop(context);
+        Future.value(false);
       },
     );
   }
@@ -67,7 +67,6 @@ class _netResult extends State<ListItem> {
   }
 
   fetchPost() async {
-
     var options = Options(baseUrl: "http://d.xiaoluyy.com/xiaolucrm/",
         connectTimeout: 5000,
         receiveTimeout: 100000,
@@ -86,7 +85,6 @@ class _netResult extends State<ListItem> {
     print(response.data);
     setState(() {
       post = Post.fromJson(json.decode(response.data));
-
     });
   }
 
@@ -103,7 +101,7 @@ class _netResult extends State<ListItem> {
     } else {
       return Container(
         child: Text(post.data,),
-        margin: EdgeInsets.all( 12.0),
+        margin: EdgeInsets.all(12.0),
       );
     }
   }

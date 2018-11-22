@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/AppBarPage.dart';
 import 'package:flutter_app/CardItem.dart';
 import 'package:flutter_app/ListModel.dart';
+import 'package:flutter_app/Page.dart';
 import 'package:flutter_app/SecondPage.dart';
 
 class MyApp extends StatelessWidget {
@@ -29,62 +31,63 @@ class NavigatorTo extends State<CardItemOperation> {
       radius: 45.0,
       backgroundImage: NetworkImage(
           "http://ph1smmuzc.bkt.clouddn.com/flutter_head.png"),),);
-
-
-  final GlobalKey<AnimatedListState> _listKey = new GlobalKey<
-      AnimatedListState>();
-  ListModel<int> _list;
-  int _selectItem;
+  ListModel listModel;
+  GlobalKey<AnimatedListState> globalKey = GlobalKey();
+  ListModel<Page> _list;
   int _nextItem;
+  int _selectedItem;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _list = ListModel<int>(
-        listKey: _listKey,
-        initialItems: <int>[1, 2, 3],
-        removedItemBuilder: _buildRemovedItem,
-    );
+    _list = ListModel<Page>(
+        removeBuilder: _buildRemoveItem,
+        listKey: globalKey,
+        initialItems: <Page>[
+          new Page(1, "CAR",Icons.directions_car), new Page(2, "BOAT",Icons.directions_boat), new Page(3, "BUS",Icons.directions_bus)
+        ]);
     _nextItem = 3;
   }
 
-  Widget _buildItem(BuildContext context, int index,
+  Widget _builderItem(BuildContext context, int index,
       Animation<double> animation) {
-    return new CardItem(animation: animation, item: index,
-      selected: _selectItem == _list[index],
+    return new CardItem(
+      animation: animation,
+      item: _list[index],
+      selected: _selectedItem == index,
       onTap: () {
+        switch(index){
+          case 0:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AppBarPage()));
+            break;
+          case 1:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SecondPage('Second')));
+            break;
+          case 2:break;
+        };
         setState(() {
-          _selectItem = _selectItem == _list[index] ? null : _list[index];
+          _selectedItem = _selectedItem ==index ? null : index;
         });
-        Navigator.push(context, new MaterialPageRoute(builder: (context)=>new SecondPage("Sencond")));
-      },
-    );
+      },);
   }
 
-  Widget _buildRemovedItem(int item, BuildContext context,
-      Animation<double> animation) {
-    return new CardItem(animation: animation,
-      item: item,
-      selected: false,
-    );
+  Widget _buildRemoveItem(BuildContext context, int index,
+      Animation animation) {
+    return new CardItem(animation: animation, item: _list[index], selected: false,);
   }
 
   void _insert() {
-    final int index = _selectItem == null ? _list.length : _list.indexOf(
-        _selectItem);
-    _list.insert(index+1, _nextItem++);
+      _list.insert(_selectedItem+1, Page(_nextItem++,"Other"+_nextItem.toString(),Icons.devices_other));
   }
 
   void _remove() {
-    if (_selectItem != null) {
-      _list.removeAt(_list.indexOf(_selectItem));
-      setState(() {
-        _selectItem = null;
-      });
+    if (_selectedItem != null) {
+      _list.removeAt(_selectedItem);
     }
+    setState(() {
+      _selectedItem=null;
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +105,10 @@ class NavigatorTo extends State<CardItemOperation> {
               style: new TextStyle(fontSize: 24.0, color: Colors.white),),
             centerTitle: true,
             actions: <Widget>[
-              new IconButton(icon: Icon(Icons.add_circle,color: Colors.white,),
+              new IconButton(icon: Icon(Icons.add_circle, color: Colors.white,),
                 onPressed: _insert,
                 tooltip: "insert a new item",),
-              IconButton(icon: Icon(Icons.remove_circle,color: Colors.white,),
+              IconButton(icon: Icon(Icons.remove_circle, color: Colors.white,),
                 onPressed: _remove,
                 tooltip: "remove the selected Item",)
             ],
@@ -171,10 +174,12 @@ class NavigatorTo extends State<CardItemOperation> {
             ),
           ),
           body: new Center(
-            child: new Padding(padding: const EdgeInsets.all(16.0),
-              child: new AnimatedList(itemBuilder: _buildItem,
-                key: _listKey,
-                initialItemCount: _list.length,),),
+              child: new Padding(padding: const EdgeInsets.all(16.0),
+                child: new AnimatedList(itemBuilder: _builderItem,
+                  initialItemCount: _list.length,
+                  controller: ScrollController(keepScrollOffset: true),
+                  key: globalKey,),
+              )
           ),
           bottomNavigationBar: new BottomNavigationBar(items: [
             new BottomNavigationBarItem(
@@ -182,8 +187,7 @@ class NavigatorTo extends State<CardItemOperation> {
             new BottomNavigationBarItem(
                 icon: Icon(Icons.settings), title: new Text('设置'))
           ],
-            onTap: (int index) {
-            },
+            onTap: (int index) {},
           ),
         )
     );
