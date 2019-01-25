@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/AppBarPage.dart';
 import 'package:flutter_app/CardItem.dart';
+import 'package:flutter_app/CardPage.dart';
 import 'package:flutter_app/ExpandItemPage.dart';
+import 'package:flutter_app/LayoutDemo.dart';
 import 'package:flutter_app/ListModel.dart';
 import 'package:flutter_app/Page.dart';
 import 'package:flutter_app/SecondPage.dart';
+import 'package:flutter_app/StackDemo.dart';
 import 'package:flutter_app/TabLayoutBarPage.dart';
+import 'package:flutter_app/GridDemo.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -49,7 +53,11 @@ class NavigatorTo extends State<CardItemOperation> {
           Page(1, "AppBarTab",Icons.tab),
           Page(2, "NetWork",Icons.network_cell),
           Page(3, "Expand",Icons.expand_more),
-          Page(4, "TabLayout", Icons.tablet)
+          Page(4, "TabLayout", Icons.tablet),
+          Page(5,"LayoutDemo",Icons.label),
+          Page(6,"GridView",Icons.grid_on),
+          Page(7,"Stack",Icons.star),
+          Page(8,"Card",Icons.credit_card),
         ]);
     _nextItem = 3;
   }
@@ -73,6 +81,18 @@ class NavigatorTo extends State<CardItemOperation> {
             break;
           case 3:
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TabLayoutBarPage()));
+            break;
+          case 4:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LayoutDemo()));
+            break;
+          case 5:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GridDemo()));
+            break;
+          case 6:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StackDemo()));
+            break;
+          case 7:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CardPage()));
             break;
         };
         setState(() {
