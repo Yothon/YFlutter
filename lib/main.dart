@@ -3,6 +3,7 @@ import 'package:flutter_app/AppBarPage.dart';
 import 'package:flutter_app/CardItem.dart';
 import 'package:flutter_app/CardPage.dart';
 import 'package:flutter_app/ExpandItemPage.dart';
+import 'package:flutter_app/FilePage.dart';
 import 'package:flutter_app/LayoutDemo.dart';
 import 'package:flutter_app/ListModel.dart';
 import 'package:flutter_app/Page.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_app/SecondPage.dart';
 import 'package:flutter_app/StackDemo.dart';
 import 'package:flutter_app/TabLayoutBarPage.dart';
 import 'package:flutter_app/GridDemo.dart';
+import 'package:flutter_app/TextFieldPage.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -58,6 +60,8 @@ class NavigatorTo extends State<CardItemOperation> {
           Page(6,"GridView",Icons.grid_on),
           Page(7,"Stack",Icons.star),
           Page(8,"Card",Icons.credit_card),
+          Page(9,"TextField",Icons.text_fields),
+          Page(10,"File",Icons.file_download)
         ]);
     _nextItem = 3;
   }
@@ -93,6 +97,12 @@ class NavigatorTo extends State<CardItemOperation> {
             break;
           case 7:
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CardPage()));
+            break;
+          case 8:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TextFieldPage()));
+            break;
+          case 9:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FilePage()));
             break;
         };
         setState(() {
