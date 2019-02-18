@@ -67,14 +67,14 @@ class _netResult extends State<ListItem> {
   }
 
   fetchPost() async {
-    var options = Options(baseUrl: "http://d.xiaoluyy.com/xiaolucrm/",
+    var options = Options(baseUrl: "*****",
         connectTimeout: 5000,
         receiveTimeout: 100000,
         headers: {
-          "mid": "868238033778652",
+          "mid": "99001177188432",
           "version": "2.9.4",
           "email": "developer@xiaoluyy.com",
-          "vkey": "b7a84594177515bc25856f847f95883b"
+          "vkey": "3138e0ab221850ed892d46ecd625c55e"
         },
         // Transform the response data to a String encoded with UTF8.
         // The default value is [ResponseType.JSON].
@@ -100,7 +100,7 @@ class _netResult extends State<ListItem> {
       return Center(child: CircularProgressIndicator(),);
     } else {
       return Container(
-        child: Text(post.data,),
+        child: Text(post.data),
         margin: EdgeInsets.all(12.0),
       );
     }
