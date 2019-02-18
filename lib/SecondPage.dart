@@ -71,10 +71,10 @@ class _netResult extends State<ListItem> {
         connectTimeout: 5000,
         receiveTimeout: 100000,
         headers: {
-          "mid": "99001177188432",
+          "mid": "******",
           "version": "2.9.4",
-          "email": "developer@xiaoluyy.com",
-          "vkey": "3138e0ab221850ed892d46ecd625c55e"
+          "email": "******",
+          "vkey": "*******"
         },
         // Transform the response data to a String encoded with UTF8.
         // The default value is [ResponseType.JSON].
