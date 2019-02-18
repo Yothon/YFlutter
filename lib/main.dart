@@ -9,6 +9,7 @@ import 'package:flutter_app/ListModel.dart';
 import 'package:flutter_app/MethodPage.dart';
 import 'package:flutter_app/Page.dart';
 import 'package:flutter_app/ProgressBarPage.dart';
+import 'package:flutter_app/RefreshListViewPage.dart';
 import 'package:flutter_app/SecondPage.dart';
 import 'package:flutter_app/StackDemo.dart';
 import 'package:flutter_app/TabLayoutBarPage.dart';
@@ -49,7 +50,6 @@ class NavigatorTo extends State<CardItemOperation> {
   int _selectedItem;
 
 
-
   @override
   void initState() {
     super.initState();
@@ -68,12 +68,12 @@ class NavigatorTo extends State<CardItemOperation> {
           Page(9, "TextField", Icons.text_fields),
           Page(10, "File", Icons.file_download),
           Page(11, "MethodChannel", Icons.merge_type),
-          Page(12,"ProgressBar",Icons.space_bar),
-          Page(13,"RefreshListView",Icons.view_list)
+          Page(12, "ProgressBar", Icons.space_bar),
+          Page(13, "RefreshListView", Icons.view_list)
         ]);
     _nextItem = 3;
   }
-  
+
   Widget _builderItem(BuildContext context, int index,
       Animation<double> animation) {
     return new CardItem(
@@ -83,57 +83,55 @@ class NavigatorTo extends State<CardItemOperation> {
       onTap: () {
         switch (index) {
           case 0:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AppBarPage()));
+            _toNavigator(context, AppBarPage());
             break;
           case 1:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => SecondPage('Second')));
+            _toNavigator(context, SecondPage('Second'));
             break;
           case 2:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ExpandItemPage()));
+            _toNavigator(context, ExpandItemPage());
             break;
           case 3:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => TabLayoutBarPage()));
+            _toNavigator(context, TabLayoutBarPage());
             break;
           case 4:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => LayoutDemo()));
+            _toNavigator(context, LayoutDemo());
             break;
           case 5:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => GridDemo()));
+            _toNavigator(context, GridDemo());
             break;
           case 6:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => StackDemo()));
+            _toNavigator(context, StackDemo());
             break;
           case 7:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => CardPage()));
+            _toNavigator(context, CardPage());
             break;
           case 8:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => TextFieldPage()));
+            _toNavigator(context, TextFieldPage());
             break;
           case 9:
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => FilePage()));
+            _toNavigator(context, FilePage());
             break;
           case 10:
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MethodPage()));
+            _toNavigator(context, MethodPage());
             break;
           case 11:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProgressBarPage()));
+            _toNavigator(context, ProgressBarPage());
+
+            break;
+          case 12:
+            _toNavigator(context, RefreshListViewPage());
             break;
         };
         setState(() {
           _selectedItem = _selectedItem == index ? null : index;
         });
       },);
+  }
+
+  _toNavigator(BuildContext context, Widget statelessWidget) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => statelessWidget));
   }
 
   Widget _buildRemoveItem(BuildContext context, int index,
