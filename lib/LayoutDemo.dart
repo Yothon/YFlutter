@@ -34,7 +34,8 @@ class TitleLayout extends StatelessWidget {
       padding: EdgeInsets.all(36.0),
       child: Row(
         children: <Widget>[
-          Expanded(child: Column(
+          Expanded(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(

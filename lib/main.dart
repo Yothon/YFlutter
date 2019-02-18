@@ -6,12 +6,15 @@ import 'package:flutter_app/ExpandItemPage.dart';
 import 'package:flutter_app/FilePage.dart';
 import 'package:flutter_app/LayoutDemo.dart';
 import 'package:flutter_app/ListModel.dart';
+import 'package:flutter_app/MethodPage.dart';
 import 'package:flutter_app/Page.dart';
+import 'package:flutter_app/ProgressBarPage.dart';
 import 'package:flutter_app/SecondPage.dart';
 import 'package:flutter_app/StackDemo.dart';
 import 'package:flutter_app/TabLayoutBarPage.dart';
 import 'package:flutter_app/GridDemo.dart';
 import 'package:flutter_app/TextFieldPage.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -45,6 +48,8 @@ class NavigatorTo extends State<CardItemOperation> {
   int _nextItem;
   int _selectedItem;
 
+
+
   @override
   void initState() {
     super.initState();
@@ -52,20 +57,23 @@ class NavigatorTo extends State<CardItemOperation> {
         removeBuilder: _buildRemoveItem,
         listKey: globalKey,
         initialItems: <Page>[
-          Page(1, "AppBarTab",Icons.tab),
-          Page(2, "NetWork",Icons.network_cell),
-          Page(3, "Expand",Icons.expand_more),
+          Page(1, "AppBarTab", Icons.tab),
+          Page(2, "NetWork", Icons.network_cell),
+          Page(3, "Expand", Icons.expand_more),
           Page(4, "TabLayout", Icons.tablet),
-          Page(5,"LayoutDemo",Icons.label),
-          Page(6,"GridView",Icons.grid_on),
-          Page(7,"Stack",Icons.star),
-          Page(8,"Card",Icons.credit_card),
-          Page(9,"TextField",Icons.text_fields),
-          Page(10,"File",Icons.file_download)
+          Page(5, "LayoutDemo", Icons.label),
+          Page(6, "GridView", Icons.grid_on),
+          Page(7, "Stack", Icons.star),
+          Page(8, "Card", Icons.credit_card),
+          Page(9, "TextField", Icons.text_fields),
+          Page(10, "File", Icons.file_download),
+          Page(11, "MethodChannel", Icons.merge_type),
+          Page(12,"ProgressBar",Icons.space_bar),
+          Page(13,"RefreshListView",Icons.view_list)
         ]);
     _nextItem = 3;
   }
-
+  
   Widget _builderItem(BuildContext context, int index,
       Animation<double> animation) {
     return new CardItem(
@@ -73,51 +81,70 @@ class NavigatorTo extends State<CardItemOperation> {
       item: _list[index],
       selected: _selectedItem == index,
       onTap: () {
-        switch(index){
+        switch (index) {
           case 0:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AppBarPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AppBarPage()));
             break;
           case 1:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SecondPage('Second')));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SecondPage('Second')));
             break;
           case 2:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ExpandItemPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ExpandItemPage()));
             break;
           case 3:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TabLayoutBarPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => TabLayoutBarPage()));
             break;
           case 4:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LayoutDemo()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => LayoutDemo()));
             break;
           case 5:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GridDemo()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => GridDemo()));
             break;
           case 6:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StackDemo()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => StackDemo()));
             break;
           case 7:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CardPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => CardPage()));
             break;
           case 8:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TextFieldPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => TextFieldPage()));
             break;
           case 9:
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FilePage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => FilePage()));
+            break;
+          case 10:
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => MethodPage()));
+            break;
+          case 11:
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ProgressBarPage()));
             break;
         };
         setState(() {
-          _selectedItem = _selectedItem ==index ? null : index;
+          _selectedItem = _selectedItem == index ? null : index;
         });
       },);
   }
 
   Widget _buildRemoveItem(BuildContext context, int index,
       Animation animation) {
-    return new CardItem(animation: animation, item: _list[index], selected: false,);
+    return new CardItem(
+      animation: animation, item: _list[index], selected: false,);
   }
 
   void _insert() {
-      _list.insert(_selectedItem+1, Page(_nextItem++,"Other"+_nextItem.toString(),Icons.devices_other));
+    _list.insert(_selectedItem + 1,
+        Page(_nextItem++, "Other" + _nextItem.toString(), Icons.devices_other));
   }
 
   void _remove() {
@@ -125,7 +152,7 @@ class NavigatorTo extends State<CardItemOperation> {
       _list.removeAt(_selectedItem);
     }
     setState(() {
-      _selectedItem=null;
+      _selectedItem = null;
     });
   }
 
