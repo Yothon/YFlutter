@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/AnimationPage.dart';
+import 'package:flutter_app/AnimationWidgetPage.dart';
 import 'package:flutter_app/AppBarPage.dart';
 import 'package:flutter_app/CardItem.dart';
 import 'package:flutter_app/CardPage.dart';
 import 'package:flutter_app/ExpandItemPage.dart';
+import 'package:flutter_app/ExpansionPanelListPage.dart';
 import 'package:flutter_app/FilePage.dart';
 import 'package:flutter_app/LayoutDemo.dart';
 import 'package:flutter_app/ListModel.dart';
@@ -11,10 +14,16 @@ import 'package:flutter_app/Page.dart';
 import 'package:flutter_app/ProgressBarPage.dart';
 import 'package:flutter_app/RefreshListViewPage.dart';
 import 'package:flutter_app/SecondPage.dart';
+import 'package:flutter_app/SharedAnimationPage.dart';
+import 'package:flutter_app/SliverAppBarPage.dart';
 import 'package:flutter_app/StackDemo.dart';
 import 'package:flutter_app/TabLayoutBarPage.dart';
 import 'package:flutter_app/GridDemo.dart';
 import 'package:flutter_app/TextFieldPage.dart';
+import 'package:flutter_app/TooltipPage.dart';
+import 'package:flutter_app/ViewPage.dart';
+import 'package:flutter_app/WrapChipDeletePage.dart';
+import 'package:flutter_app/WrapFlowWidgetPage.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -26,6 +35,7 @@ class MyApp extends StatelessWidget {
 }
 
 class CardItemOperation extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -69,7 +79,16 @@ class NavigatorTo extends State<CardItemOperation> {
           Page(10, "File", Icons.file_download),
           Page(11, "MethodChannel", Icons.merge_type),
           Page(12, "ProgressBar", Icons.space_bar),
-          Page(13, "RefreshListView", Icons.view_list)
+          Page(13, "RefreshListView", Icons.view_list),
+          Page(14, "Animation", Icons.looks),
+          Page(15, "AnimationWidget", Icons.android),
+          Page(16, "SharedAnimation", Icons.star),
+          Page(17, "SliverAppBar", Icons.info),
+          Page(18, "Wrap", Icons.wrap_text),
+          Page(19, "Tooltip", Icons.delete),
+          Page(20, "WrapChipDelete", Icons.delete),
+          Page(21, "ExpansionPanelList", Icons.expand_more),
+          Page(22,"View",Icons.view_list)
         ]);
     _nextItem = 3;
   }
@@ -122,6 +141,34 @@ class NavigatorTo extends State<CardItemOperation> {
           case 12:
             _toNavigator(context, RefreshListViewPage());
             break;
+          case 13:
+            _toNavigator(context, AnimationPage());
+            break;
+          case 14:
+            _toNavigator(context, AnimationWidgetPage());
+            break;
+          case 15:
+            _toNavigator(context, SharedAnimationPage());
+            break;
+          case 16:
+            _toNavigator(context, SliverAppBarPage());
+            break;
+          case 17:
+            _toNavigator(context, WrapFlowWidgetPage());
+            break;
+          case 18:
+            _toNavigator(context, TooltipPage());
+            break;
+          case 19:
+            _toNavigator(context, WrapChipDeletePage());
+            break;
+          case 20:
+            _toNavigator(context, ExpansionPanelListPage());
+            break;
+          case 21:
+            _toNavigator(context, ViewPage());
+            break;
+          default:
         };
         setState(() {
           _selectedItem = _selectedItem == index ? null : index;
@@ -156,8 +203,8 @@ class NavigatorTo extends State<CardItemOperation> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: new ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.lightBlue[300],
@@ -224,7 +271,8 @@ class NavigatorTo extends State<CardItemOperation> {
                       style: new TextStyle(
                           color: Colors.black, fontSize: 14.0),)
                   ],
-                ), new Row(
+                ),
+                new Row(
                   children: <Widget>[
                     new IconButton(icon: Icon(Icons.message),
                       onPressed: () {},
