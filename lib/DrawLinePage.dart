@@ -16,7 +16,7 @@ class DrawLinePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Path",
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(color: Colors.white54),
         ),
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
